@@ -12,7 +12,10 @@ export const App = () => {
 
   const [contacts, setContacts] = useState(() => {
     const localStorageValue = JSON.parse(localStorage.getItem(CONTACT_LS_KEY));
-    return localStorageValue;
+    if (localStorageValue !== null) {
+      return localStorageValue;
+    }
+    return [];
   });
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export const App = () => {
     setContacts(prevState => prevState.filter(contact => contact.id !== id));
   };
 
-  const filteredContacts = contacts.filter(contact =>
+  const filteredContacts =  contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
